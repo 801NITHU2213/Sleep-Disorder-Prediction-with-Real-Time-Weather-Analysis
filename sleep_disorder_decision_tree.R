@@ -65,6 +65,38 @@ cart_model <- rpart(Sleep.Disorder ~ ., data = trainData, method = "class")
 rpart.plot(cart_model,
            extra = 106,
            main = "Decision Tree for Sleep Disorder Classification")
+# -----------------------------------------------------------
+# 7.5 Fetch Real-Time Weather Data (OpenWeatherMap API)
+# -----------------------------------------------------------
+
+library(httr)
+library(jsonlite)
+
+api_key <- "YOUR_API_KEY"   # 🔹 Replace with your actual API key
+city <- "Chennai"
+
+url <- paste0(
+  "https://api.openweathermap.org/data/2.5/weather?q=",
+  city, "&appid=", api_key, "&units=metric"
+)
+
+response <- GET(url)
+weather_data <- fromJSON(content(response, "text"))
+
+print("Fetched Weather Data:")
+print(weather_data)
+
+# Extract features you need (temperature, humidity, pressure, wind speed)
+realtime_input <- data.frame(
+  Temperature = weather_data$main$temp,
+  Humidity = weather_data$main$humidity,
+  Pressure = weather_data$main$pressure,
+  Wind.Speed = weather_data$wind$speed
+)
+
+print("Real-time weather input:")
+print(realtime_input)
+
 
 # -----------------------------------------------------------
 # 8. Predictions on Test Data
