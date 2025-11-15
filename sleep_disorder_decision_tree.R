@@ -72,7 +72,7 @@ rpart.plot(cart_model,
 library(httr)
 library(jsonlite)
 
-api_key <- "YOUR_API_KEY"   # 🔹 Replace with your actual API key
+api_key <- "17907f3535005f7359360540e243193f"   # 🔹 Replace with your actual API key
 city <- "Chennai"
 
 url <- paste0(
